@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Carel.Nabor </title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  line-height: 1.6;
+  padding-top: 70px; /* espace pour la navbar fixe en haut */
+  padding-bottom: 20px;
+}
+
+html{
+    background-color: #b9dfdf;
+    color: #0b0303;
+}
+
+.navbar {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ background: #2c3a44;
+ color: #ede5e5;
+ margin: 0;
+ padding: 1rem;
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ z-index: 100;
+            }
+
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  display: flex;
+  white-space: nowrap;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: #fff;
+}
+
+.skills {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #eee;
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.projets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.projet-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+  padding: 0 15px;
+}
+
+form input, form textarea {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #4a3e3e;
+  color: #fff;
+  margin: 5px;
+  border-radius: 1rem;
+}
+
+  /* Compétences empilées */
+  .skills {
+    flex-wrap: wrap;
+  }
+
+  /* Hero plus petit */
+  .hero {
+    padding: 30px 15px;
+  }
+
+  .hero h2 {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+  .section {
+    padding: 10px;
+    flex-direction: column;
+  }
+  .projets, .competences {
+    flex-direction: column;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar ul {
+    flex-direction: column;
+    background: #333;
+    width: 100%;
+    display: none;
+  }
+  .navbar ul.active {
+    display: flex;
+  }
+  .navbar ul li a {
+    margin: 8px 0;
+  }
+  body {
+    padding-top: 60px;
+  }
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+}
+
+
+img
+{
+    border-radius: 50px;
+    max-width: 100%;
+}
+
+/* ===== ANIMATIONS ===== */
+
+/* Apparition en fondu + montée */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Le hero apparaît au chargement */
+.hero h2,
+.hero p,
+.hero .btn {
+  animation: fadeInUp 1s ease forwards;
+}
+
+.hero p {
+  animation-delay: 0.3s;
+}
+
+.hero .btn {
+  animation-delay: 0.6s;
+}
+
+/* Photo de profil qui "respire" */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.hero img {
+  animation: pulse 3s ease-in-out infinite;
+  position: static;
+}
+
+/* Effet de soulignement sur les liens navbar */
+.navbar ul li a {
+  position: relative;
+}
+
+.navbar ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background: #4facfe;
+  transition: width 0.3s;
+}
+  
+
+
+.navbar ul li a:hover::after {
+  width: 100%;
+}
+
+/* Cartes projets qui se soulèvent au survol */
+.projet-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.projet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Le conteneur principal (met l'image à gauche et TOUT le bloc de texte à droite) */
+.hero {
+  display: flex;
+  align-items: center;    /* Centre verticalement l'image et le bloc de texte */
+  justify-content: center;/* Centre le tout au milieu de l'écran */
+  flex-wrap: wrap;
+  gap: 40px;              /* Espace de 40px entre l'image et le début du texte */
+  padding: 70px 150px;
+  background: linear-gradient(to right, #1a384f, #168695);
+  color: #fff;
+  border-radius: 2rem;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 20px;
+    border-radius: 1rem;
+  }
+}
+
+/* Style de l'image de profil */
+.hero-image,
+.hero img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;     /* Rend l'image parfaitement ronde */
+  object-fit: cover;      /* Empêche la déformation de l'image */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+  .hero-image,
+  .hero img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Le conteneur de texte à droite */
+.hero-text {
+  display: flex;
+  flex-direction: column; /* Force TOUS les enfants (h2, p, a) à s'empiler verticalement */
+  align-items: flex-start;/* Aligne le début de chaque ligne proprement à gauche */
+  text-align: left;
+}
+
+/* On s'assure que chaque élément prend sa propre ligne avec un espacement propre */
+.hero-text h2 {
+  margin: 0 0 5px 0;      /* Ligne 1 : Carel.Nabor */
+  font-size: 2.2rem;
+}
+
+@media (max-width: 480px) {
+  .hero-text h2 {
+    font-size: 1.6rem;
+  }
+}
+
+.hero-text .titre-dev {
+  margin: 0 0 10px 0;     /* Ligne 2 : Développeur Web Junior */
+  font-size: 1.4rem;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.hero-text .description {
+  margin: 0 0 20px 0;     /* Ligne 3 : Passionné par la création... */
+  font-size: 1.1rem;
+  max-width: 500px;       /* Évite que la description ne s'étale trop si l'écran est géant */
+}
+
+.hero-text .btn {
+  display: inline-block;  /* Ligne 4 : Le bouton */
+  padding: 10px 20px;
+  background: #fff;
+  color: #4facfe;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+ul{
+    text-align: left;
+margin: 1rem;
+}
+
+#apropos, #competences, #projets, #contact {
+  padding: 40px 20px;
+}
+
+@media (max-width: 480px) {
+  #apropos, #competences, #projets, #contact {
+    padding: 25px 12px;
+  }
+}
+
+.competence-grid{
+ display:grid;
+ grid-template-columns: repeat(2,1fr);
+ gap:30px;
+ max-width: 1100px;
+ margin: auto;   
+}
+
+@media (max-width: 600px) {
+  .competence-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.competence-card{
+    padding: 25px;
+    border-radius: 15px;
+}
+.competence-card h3 {
+color: #1c2824;
+margin-bottom:15px ;
+font-size: 18px;
+}
+.barre-fond {
+    background-color: #1a384f;
+    border-radius: 25px;
+    height: 25px;
+    overflow: hidden;
+
+}
+.barre-progression {
+    background-color: #0f7ad8;
+    border-radius: 25px;
+    height: 25px;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+
+.projets-container {
+  display: flex;
+  overflow-x: auto; /* Active le scroll horizontal */
+  scroll-behavior: smooth; /* Défilement fluide */
+  gap: 20px; /* Espacement entre les cartes */
+  padding: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.projet-card {
+  flex: 0 0 auto; /* Empêche les cartes de se réduire */
+  width: 300px;
+  max-width: 85vw;
+  background: #f5f5f5;
+  border-radius: 10px;
+  text-align: center;
+  padding: 15px;
+}
+
+.projet-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#scroll-left, #scroll-right {
+  padding: 8px 14px;
+  margin: 10px 5px 0;
+  border: none;
+  border-radius: 6px;
+  background: #2c3a44;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .navbar .logo {
+    font-size: 1.1rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">Carel.Nabor DOHOU </h1>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">☰</button>
+      <ul id="nav-menu">
+        <li><a href="#accueil">🏘️📂Accueil</a></li>
+        <li><a href="#apropos">🗃️À propos</a></li>
+        <li><a href="#competences">👨‍💻Compétences</a></li>
+        <li><a href="#projets">📽️Projets</a></li>
+        <li><a href="#contact">📳Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="accueil" class="hero">
+    <img src="carel.jpeg" alt="photo de profil" width="200" height="200">
+    <div class="hero-text">
+      <h2>𝓒𝓪𝓻𝓮𝓵.𝓝𝓪𝓫𝓸𝓻</h2>
+      <p class="titre-dev">Développeur Web Junior</p>
+      <p class="description">Passionné par la création de sites modernes et de la programmation.</p>
+      <a href="#projets" class="btn">Voir mes projets</a>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="apropos">
+    <h2>À propos</h2>
+    <p>Etudiant en licence 1 à la haute école de commerce et de management <strong>HECM</strong></p>
+    <ul>
+      <li><strong>Âge:</strong> 19 ans</li>
+      <li><strong>Ville:</strong> Porto-Novo</li>
+      <li><strong>Email:</strong> careldohou@gmail.com</li>
+      <li><strong>Tel:</strong> +229 01 62 03 98 73</li>
+      <li><strong>Niveau d'étude:</strong> Licence 1 des systèmes d'informations et logiciels</li>
+    </ul>
+  </section>
+
+  <!-- Compétences -->
+  <section id="competences">
+    <h2 class="section-titre">Compétences</h2>
+    <div class="competence-grid">
+
+      <div class="competence-card">
+        <h3>HTML — 80%</h3>
+        <div class="barre-fond">
+          <div class="barre-progression" style="width: 80%">80%</div>
+        </div>
+      </div>
+
+      <div class="competence-card">
+        <h3>CSS — 70%</h3>
+        <div class="barre-fond">
+          <div class="barre-progression" style="width: 70%">70%</div>
+        </div>
+      </div>
+
+      <div class="competence-card">
+        <h3>JAVASCRIPT — 15%</h3>
+        <div class="barre-fond">
+          <div class="barre-progression" style="width: 15%">15%</div>
+        </div>
+      </div>
+
+      <div class="competence-card">
+        <h3>PHP — 60%</h3>
+        <div class="barre-fond">
+          <div class="barre-progression" style="width: 60%">60%</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section Projets -->
+  <section id="projets">
+    <h2>Mes Projets</h2>
+    <div class="projets-container">
+      <div class="projet-card">
+        <img src="projet1.jpeg" alt="Projet 1">
+        <h3>Projet 1 : Programmation ESP32</h3>
+        <p>Programmation d'un micro-contrôleur ESP32 pour le contrôle à distance des appareils.</p>
+        <a href="#" class="btn">Voir plus</a>
+      </div>
+      <div class="projet-card">
+        <img src="projet2.jpeg" alt="Projet 2">
+        <h3>Projet 2 : Réservation de voyages</h3>
+        <p>Un site web de réservation de voyages qui permet aux utilisateurs de rechercher et de réserver des vols, des hôtels et des activités en ligne.</p>
+        <a href="#" class="btn">Voir plus</a>
+      </div>
+
+      <div class="projet-card">
+        <img src="projet3.jpeg" alt="Projet 3">
+        <h3>Projet 3 : Recettes de cuisine</h3>
+        <p>Un site de recettes de cuisine où les utilisateurs peuvent partager leurs recettes, les noter, les commenter et les sauvegarder dans leurs favoris.</p>
+        <a href="#" class="btn">Voir plus</a>
+      </div>
+
+      <div class="projet-card">
+        <img src="projet4 .jpeg" alt="Projet 4">
+        <h3>Projet 4 : Réseau social d'information</h3>
+        <p>Un réseau social qui permet aux utilisateurs de poster des nouveautés.</p>
+        <a href="#" class="btn">Voir plus</a>
+      </div>
+
+      <div class="projet-card">
+        <img src="projet5 .jpeg" alt="Projet 5">
+        <h3>Projet 5 : Système de gestion de projet</h3>
+        <p>Développer un système de gestion de projets permet d'acquérir des compétences en matière de collaboration et de gestion du temps.</p>
+        <a href="#" class="btn">Voir plus</a>
+      </div>
+
+      <div class="projet-card">
+        <img src="projet6 .jpeg" alt="Projet 6">
+        <h3>Projet 6 : Boutique d'e-commerce</h3>
+        <p>Une application d'e-commerce, qui permet aux utilisateurs d'acheter des produits en ligne, de suivre leur commande et de gérer leur compte.</p>
+        <a href="#" class="btn">Voir plus</a>
+      </div>
+
+    </div>
+    <div>
+      <button id="scroll-left">⬅️</button>
+      <button id="scroll-right">➡️</button>
+    </div>
+  </section>
+
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <form>
+      <input type="text" placeholder="Nom" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Message" required></textarea>
+      <button type="submit" class="btn">Envoyer</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Carel.Nabor - Tous droits réservés</p>
+    <div class="socials">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+    </div>
+  </footer>
+
+  <script>
+    // Menu mobile (hamburger)
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Boutons de défilement horizontal des projets
+    const container = document.querySelector('.projets-container');
+    document.getElementById('scroll-left').addEventListener('click', () => {
+      container.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+    document.getElementById('scroll-right').addEventListener('click', () => {
+      container.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
